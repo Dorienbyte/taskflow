@@ -1,0 +1,19 @@
+# TaskFlow
+
+Proyecto de gestión de tareas. Este proyecto sigue una arquitectura modular con separación de responsabilidades: lógica de interfaz, orquestador y comunicación con la API.
+
+## Estructura del proyecto
+- `index.html`: Estructura principal y carga de módulos.
+- `style.css`: Estilos y diseño responsivo de la interfaz.
+- `js/`: Lógica dividida en módulos:
+    - `main.js`: Orquestador de la aplicación.
+    - `ui.js`: Control de la interfaz de usuario (mostrar/ocultar vistas).
+    - `api.js`: Comunicación con el servidor JSON.
+
+## Instalación y ejecución
+1. Clona este repositorio:
+   `git clone https://github.com/TuUsuario/taskflow.git`
+2. Abre `index.html` en tu navegador.
+3. Para la base de datos, asegúrate de tener instalado `json-server`:
+   `npm install -g json-server`
+   `json-server --watch db.json`
