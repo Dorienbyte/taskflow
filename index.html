@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="hero-view" class="view">
+        <h1>TaskFlow</h1>
+        <button id="btn-start">Comenzar</button>
+    </main>
+
+    <main id="dashboard-view" class="view hidden">
+        <h2>Dashboard</h2>
+        <button id="btn-go-create">Nueva Tarea</button>
+    </main>
+
+    <main id="form-view" class="view hidden">
+        <h2>Crear Tarea</h2>
+        <form id="task-form">
+            <input type="text" id="title" placeholder="Título">
+            <button type="button" id="btn-cancel">Cancelar</button>
+            <button type="submit">Guardar</button>
+        </form>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
