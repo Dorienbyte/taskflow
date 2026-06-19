@@ -1,3 +1,29 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Finalize Brand Anchors",
+      "category": "Design System",
+      "status": "Completed"
+    },
+    {
+      "id": "2",
+      "title": "Design System Implementation",
+      "category": "Work",
+      "status": "In Progress"
+    },
+    {
+      "id": "3",
+      "title": "User Feedback Session",
+      "category": "Marketing",
+      "status": "Pending"
+    },
+    {
+      "id": "4",
+      "title": "Quarterly Review Deck",
+      "category": "Admin",
+      "status": "Pending"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -6,22 +6,65 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main id="hero-view" class="view">
+  <main id="hero-view" class="view">
+    <div class="hero-center">
         <h1>TaskFlow</h1>
-        <button id="btn-start">Comenzar</button>
-    </main>
+        <div class="checkmark-icon">✓</div>
+    </div>
+    <button id="btn-start">Get Started</button>
+  </main>
 
     <main id="dashboard-view" class="view hidden">
-        <h2>Dashboard</h2>
-        <button id="btn-go-create">Nueva Tarea</button>
+        <h2>TaskFlow</h2>
+
+        <section class="progress-section">
+            <p> Progress: 70%</p>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+        </section>
+
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search Task Here">
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Pending</button>
+            <button class="filter-btn">In Progress</button>
+            <button class="filter-btn">Completed</button>
+        </div>
+
+        <div id="tasks-container"></div>
+
+        <button id="btn-go-create">New Task</button>
     </main>
 
     <main id="form-view" class="view hidden">
-        <h2>Crear Tarea</h2>
+        <div class="form-header">
+            <button id="btn-cancel" class="back-btn" type="button">←</button>
+            <h2 class="form-title">Create Task</h2>
+        </div>
+
         <form id="task-form">
-            <input type="text" id="title" placeholder="Título">
-            <button type="button" id="btn-cancel">Cancelar</button>
-            <button type="submit">Guardar</button>
+            <h3 class="form-subtitle">New Objective</h3>
+            <p class="form-description">Define your next milestone with precision.</p>
+
+            <label class="field-label">TITLE</label>
+            <input type="text" id="title" placeholder="What needs to be done?">
+
+            <label class="field-label">DESCRIPTION</label>
+            <textarea id="description" placeholder="Add context, sub-tasks, or notes..."></textarea>
+
+            <div class="form-actions">
+                <button type="button" class="pill-btn">Set Due Date</button>
+                <button type="button" class="pill-btn">Add Category</button>
+            </div>
+
+            <div class="focus-banner">
+                <span class="focus-badge">Focus Mode Active</span>
+            </div>
+
+            <button type="submit">Create Task</button>
         </form>
     </main>
 

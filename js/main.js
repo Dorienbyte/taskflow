@@ -1,5 +1,10 @@
-import { toggleView } from './ui.js';
-import { addTask } from './api.js';
+import { toggleView, renderTasks } from './ui.js';
+import { addTask, getTasks } from './api.js';
+
+const loadTasks = async () => {
+    const tasks = await getTasks();
+    renderTasks(tasks);
+};
 
 document.getElementById('btn-start').addEventListener('click', () => toggleView('dashboard-view'));
 document.getElementById('btn-go-create').addEventListener('click', () => toggleView('form-view'));
@@ -10,17 +15,19 @@ if (taskForm) {
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const title = document.getElementById('title').value;
-        await addTask(title);
+        const description = document.getElementById('description').value;
+
+        await addTask({
+            title: title,
+            description: description,
+            status: 'Pending',
+            category: ''
+        });
+
         taskForm.reset();
         toggleView('dashboard-view');
+        await loadTasks();
     });
 }
 
-localStorage.setItem('user', 'Dorien');
-const user = localStorage.getItem('user');
-console.log("Usuario actual:", user);
-
-if (!localStorage.getItem('visited')) {
-    console.log("Bienvenido por primera vez");
-    localStorage.setItem('visited', 'true');
-}
+loadTasks();
