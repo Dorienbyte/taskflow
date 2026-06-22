@@ -7,29 +7,25 @@
       "status": "Completed"
     },
     {
-      "id": "2",
-      "title": "Design System Implementation",
-      "category": "Work",
-      "status": "In Progress"
+      "title": "aprender java",
+      "description": "semana 1 estudiar los conceptos",
+      "status": "Completed",
+      "category": "",
+      "id": "XHPDw8qyWaA"
     },
     {
-      "id": "3",
-      "title": "User Feedback Session",
-      "category": "Marketing",
-      "status": "Pending"
-    },
-    {
-      "id": "4",
-      "title": "Quarterly Review Deck",
-      "category": "Admin",
-      "status": "Pending"
+      "title": "arreglar parpadeo",
+      "description": "solucionando parpadeo del dom",
+      "status": "Completed",
+      "category": "",
+      "id": "zIqfVMHGEMk"
     },
     {
       "title": "",
       "description": "",
       "status": "Pending",
       "category": "",
-      "id": "0mGQBngX3dU"
+      "id": "6_WGVqpKqE4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

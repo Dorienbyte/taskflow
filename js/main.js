@@ -1,16 +1,57 @@
-import { toggleView, renderTasks } from './ui.js';
-import { addTask, getTasks } from './api.js';
-import { initFilters } from './filters.js'; // 1. Importa el módulo
+import { toggleView, renderTasks, updateTaskItem, updateProgressBar, buildTaskItem } from './ui.js';
+import { addTask, getTasks, updateTask } from './api.js';
+import { initFilters } from './filters.js';
+import { TASK_STATUS, FILTERS } from './constants.js';
 
-const loadTasks = async () => {
-    const tasks = await getTasks();
-    renderTasks(tasks);
+let allTasks = [];
+let currentFilter = FILTERS.ALL;
+
+const filterTasks = (tasks, filter) => {
+    if (filter === FILTERS.PENDING) {
+        return tasks.filter(task => (task.status || TASK_STATUS.PENDING) === TASK_STATUS.PENDING);
+    }
+    if (filter === FILTERS.IN_PROGRESS) {
+        return tasks.filter(task => task.status === TASK_STATUS.IN_PROGRESS);
+    }
+    if (filter === FILTERS.COMPLETED) {
+        return tasks.filter(task => task.status === TASK_STATUS.COMPLETED);
+    }
+    return tasks;
 };
 
-// 2. Inicializa los filtros al arrancar
-document.addEventListener('DOMContentLoaded', () => {
-    initFilters();
-});
+const displayTasks = () => {
+    const visibleTasks = filterTasks(allTasks, currentFilter);
+    renderTasks(visibleTasks, handleToggleTask);
+    updateProgressBar(allTasks);
+};
+
+const loadTasks = async () => {
+    allTasks = await getTasks();
+    displayTasks();
+};
+
+const getNextStatus = (currentStatus) => {
+    if (currentStatus === TASK_STATUS.PENDING) return TASK_STATUS.IN_PROGRESS;
+    if (currentStatus === TASK_STATUS.IN_PROGRESS) return TASK_STATUS.COMPLETED;
+    return TASK_STATUS.PENDING;
+};
+
+const handleToggleTask = async (task) => {
+    const currentStatus = task.status || TASK_STATUS.PENDING;
+    const newStatus = getNextStatus(currentStatus);
+    const updatedTask = { ...task, status: newStatus };
+
+    allTasks = allTasks.map(t => t.id === task.id ? updatedTask : t);
+    updateTaskItem(updatedTask);
+    updateProgressBar(allTasks);
+
+    await updateTask(task.id, { status: newStatus });
+};
+
+const handleFilterChange = (filter) => {
+    currentFilter = filter;
+    displayTasks();
+};
 
 document.getElementById('btn-start').addEventListener('click', () => toggleView('dashboard-view'));
 document.getElementById('btn-go-create').addEventListener('click', () => toggleView('form-view'));
@@ -18,22 +59,38 @@ document.getElementById('btn-cancel').addEventListener('click', () => toggleView
 
 const taskForm = document.getElementById('task-form');
 if (taskForm) {
-    taskForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    taskForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
 
-        await addTask({
+        const newTask = await addTask({
             title: title,
             description: description,
-            status: 'Pending',
+            status: TASK_STATUS.PENDING,
             category: ''
         });
 
+        if (newTask) {
+            allTasks.push(newTask);
+            
+            // Si el filtro activo coincide con la nueva tarea (Pending / All),
+            // la agregamos directamente al DOM sin parpadeos ni borrar la lista completa.
+            if (currentFilter === FILTERS.ALL || currentFilter === FILTERS.PENDING) {
+                const container = document.getElementById('tasks-container');
+                if (container) {
+                    const taskItem = buildTaskItem(newTask, handleToggleTask);
+                    container.appendChild(taskItem);
+                }
+            }
+            updateProgressBar(allTasks);
+        }
+
         taskForm.reset();
         toggleView('dashboard-view');
-        await loadTasks();
     });
 }
 
+initFilters(handleFilterChange);
 loadTasks();

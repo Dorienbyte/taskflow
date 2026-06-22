@@ -1,14 +1,54 @@
 const API_URL = 'http://localhost:3000/tasks';
 
 export const getTasks = async () => {
-    const response = await fetch(API_URL);
-    return await response.json();
+    try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Could not fetch tasks:', error.message);
+        return [];
+    }
 };
 
 export const addTask = async (taskData) => {
-    await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(taskData)
-    });
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(taskData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Could not create task:', error.message);
+        return null;
+    }
+};
+
+export const updateTask = async (id, updatedFields) => {
+    try {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedFields)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Could not update task:', error.message);
+        return null;
+    }
 };
