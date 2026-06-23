@@ -9,5 +9,6 @@ export const initFilters = (onFilterChange) => {
             const selectedFilter = button.getAttribute('data-filter');
             onFilterChange(selectedFilter);
         });
-    });
+    });   
+
 };
