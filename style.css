@@ -5,7 +5,7 @@
 body {
     background-color: #000;
     margin: 0;
-    padding: 20px;       
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,20 +20,20 @@ body {
 
 .view {
     width: 100%;
-max-width: 450px;
-height: 90vh;
-background-color: #121212;
-border: 1px solid #333;
-border-radius: 30px;
-padding: 30px;
-display: flex;
-flex-direction: column;
-color: #ffffff;
-box-sizing: border-box;
-overflow-y: auto;
-margin-bottom: 15px;
-    
-    
+    max-width: 450px;
+    height: 90vh;
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 30px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin-bottom: 15px;
+
+
 }
 
 
@@ -45,7 +45,15 @@ margin-bottom: 15px;
     display: none;
 }
 
+.hero-center h1 {
+    position: absolute;
+    top: 20px;
+    margin: 0;
+}
+
+
 .hero-center {
+    position: relative;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -65,7 +73,10 @@ margin-bottom: 15px;
     margin-bottom: 20px;
 }
 
-h2 { text-align: center; margin-top: 0; }
+h2 {
+    text-align: center;
+    margin-top: 0;
+}
 
 .progress-section {
     background-color: #1a1a1a;
@@ -142,14 +153,15 @@ input {
     color: white;
     border: none;
 }
+
 #tasks-container {
     flex-grow: 1;
     overflow-y: auto;
     margin: 0;
     padding: 0;
     list-style: none;
-    min-height: 200px; 
-    width: 100%;       
+    min-height: 200px;
+    width: 100%;
 }
 
 
@@ -216,7 +228,8 @@ input {
     color: #2dd4bf;
 }
 
-#btn-go-create, #btn-start {
+#btn-go-create,
+#btn-start {
     margin-top: auto;
     background-color: #a855f7;
     border: none;

@@ -5,41 +5,6 @@
       "title": "Finalize Brand Anchors",
       "category": "Design System",
       "status": "Pending"
-    },
-    {
-      "title": "aprender java",
-      "description": "semana 1 estudiar los conceptos",
-      "status": "Pending",
-      "category": "",
-      "id": "XHPDw8qyWaA"
-    },
-    {
-      "title": "arreglar parpadeo",
-      "description": "solucionando parpadeo del dom",
-      "status": "Pending",
-      "category": "",
-      "id": "zIqfVMHGEMk"
-    },
-    {
-      "title": "",
-      "description": "",
-      "status": "Pending",
-      "category": "",
-      "id": "6_WGVqpKqE4"
-    },
-    {
-      "title": "",
-      "description": "",
-      "status": "Pending",
-      "category": "",
-      "id": "o1cJIXOazSI"
-    },
-    {
-      "title": "",
-      "description": "",
-      "status": "Pending",
-      "category": "",
-      "id": "aMbmCDUhqPM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
