@@ -4,7 +4,14 @@
       "id": "1",
       "title": "Finalize Brand Anchors",
       "category": "Design System",
-      "status": "Pending"
+      "status": "Completed"
+    },
+    {
+      "title": "terminar aplicacion ",
+      "description": "terminar las funcionalidades como papelera \ncalendario y category",
+      "status": "Completed",
+      "category": "",
+      "id": "qrIx3QGEZAk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

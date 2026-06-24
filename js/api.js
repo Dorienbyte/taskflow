@@ -52,3 +52,20 @@ export const updateTask = async (id, updatedFields) => {
         return null;
     }
 };
+
+export const deleteTask = async (id) => {
+    try {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Could not delete task:', error.message);
+        return false;
+    }
+};

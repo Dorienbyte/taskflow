@@ -1,10 +1,11 @@
 import { toggleView, renderTasks, updateTaskItem, updateProgressBar, buildTaskItem } from './ui.js';
-import { addTask, getTasks, updateTask } from './api.js';
+import { addTask, getTasks, updateTask, deleteTask } from './api.js';
 import { initFilters } from './filters.js';
 import { TASK_STATUS, FILTERS } from './constants.js';
 
 let allTasks = [];
 let currentFilter = FILTERS.ALL;
+let searchQuery = '';
 
 const filterTasks = (tasks, filter) => {
     if (filter === FILTERS.PENDING) {
@@ -20,8 +21,14 @@ const filterTasks = (tasks, filter) => {
 };
 
 const displayTasks = () => {
-    const visibleTasks = filterTasks(allTasks, currentFilter);
-    renderTasks(visibleTasks, handleToggleTask);
+    let visibleTasks = filterTasks(allTasks, currentFilter);
+    if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        visibleTasks = visibleTasks.filter(task => 
+            task.title.toLowerCase().includes(query)
+        );
+    }
+    renderTasks(visibleTasks, handleToggleTask, handleDeleteTask);
     updateProgressBar(allTasks);
 };
 
@@ -46,6 +53,12 @@ const handleToggleTask = async (task) => {
     updateProgressBar(allTasks);
 
     await updateTask(task.id, { status: newStatus });
+};
+
+const handleDeleteTask = async (id) => {
+    allTasks = allTasks.filter(t => t.id !== id);
+    displayTasks();
+    await deleteTask(id);
 };
 
 const handleFilterChange = (filter) => {
@@ -80,7 +93,7 @@ if (taskForm) {
             if (currentFilter === FILTERS.ALL || currentFilter === FILTERS.PENDING) {
                 const container = document.getElementById('tasks-container');
                 if (container) {
-                    const taskItem = buildTaskItem(newTask, handleToggleTask);
+                    const taskItem = buildTaskItem(newTask, handleToggleTask, handleDeleteTask);
                     container.appendChild(taskItem);
                 }
             }
@@ -94,3 +107,11 @@ if (taskForm) {
 
 initFilters(handleFilterChange);
 loadTasks();
+
+const searchInput = document.querySelector('.search-container input');
+if (searchInput) {
+    searchInput.addEventListener('input', (event) => {
+        searchQuery = event.target.value;
+        displayTasks();
+    });
+}

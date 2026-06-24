@@ -8,14 +8,14 @@ export const toggleView = (viewId) => {
     }
 };
 
-export const renderTasks = (tasks, onToggleTask) => {
+export const renderTasks = (tasks, onToggleTask, onDeleteTask) => {
     const container = document.getElementById('tasks-container');
     if (!container) return;
 
     container.innerHTML = '';
 
     tasks.forEach(task => {
-        const taskItem = buildTaskItem(task, onToggleTask);
+        const taskItem = buildTaskItem(task, onToggleTask, onDeleteTask);
         container.appendChild(taskItem);
     });
 };
@@ -63,7 +63,7 @@ export const updateTaskItem = (task) => {
     metaSpan.textContent = status;
 };
 
-export const buildTaskItem = (task, onToggleTask) => {
+export const buildTaskItem = (task, onToggleTask, onDeleteTask) => {
     const status = task.status || TASK_STATUS.PENDING;
     const category = task.category || '';
 
@@ -90,6 +90,7 @@ export const buildTaskItem = (task, onToggleTask) => {
             <p class="task-title ${titleClass}">${task.title}</p>
             <p class="task-meta">${category}${category ? ' • ' : ''}<span class="${metaClass}">${status}</span></p>
         </div>
+        <button class="delete-btn" aria-label="Delete task">🗑️</button>
     `;
 
     const statusIcon = taskItem.querySelector('.task-status-icon');
@@ -99,6 +100,15 @@ export const buildTaskItem = (task, onToggleTask) => {
         event.stopPropagation();
         onToggleTask(task);
     });
+
+    const deleteBtn = taskItem.querySelector('.delete-btn');
+    if (deleteBtn && onDeleteTask) {
+        deleteBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onDeleteTask(task.id);
+        });
+    }
 
     return taskItem;
 };
