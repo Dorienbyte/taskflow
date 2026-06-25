@@ -1,5 +1,4 @@
 import { TASK_STATUS } from './constants.js';
-
 export const toggleView = (viewId) => {
     document.querySelectorAll('.view').forEach(view => view.classList.add('hidden'));
     const targetView = document.getElementById(viewId);
