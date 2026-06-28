@@ -1,6 +1,7 @@
+
 import { toggleView, renderTasks, updateTaskItem, updateProgressBar, buildTaskItem } from './ui.js';
 import { addTask, getTasks, updateTask, deleteTask } from './api.js';
-import { initFilters } from './filters.js';
+import { initFilters,getNextStatus  } from './filters.js';
 import { TASK_STATUS, FILTERS } from './constants.js';
 
 let allTasks = [];
@@ -37,11 +38,7 @@ const loadTasks = async () => {
     displayTasks();
 };
 
-const getNextStatus = (currentStatus) => {
-    if (currentStatus === TASK_STATUS.PENDING) return TASK_STATUS.IN_PROGRESS;
-    if (currentStatus === TASK_STATUS.IN_PROGRESS) return TASK_STATUS.COMPLETED;
-    return TASK_STATUS.PENDING;
-};
+
 
 const handleToggleTask = async (task) => {
     const currentStatus = task.status || TASK_STATUS.PENDING;

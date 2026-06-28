@@ -12,6 +12,13 @@
       "status": "Completed",
       "category": "",
       "id": "qrIx3QGEZAk"
+    },
+    {
+      "title": "codigo",
+      "description": "estudiar el codigo",
+      "status": "Completed",
+      "category": "",
+      "id": "ye1JNTnPTZ4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

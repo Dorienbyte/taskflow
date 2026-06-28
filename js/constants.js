@@ -10,3 +10,4 @@ export const FILTERS = {
     IN_PROGRESS: 'in-progress',
     COMPLETED: 'completed'
 };
+export const API_URL = 'http://localhost:3000/tasks';

@@ -1,5 +1,4 @@
-const API_URL = 'http://localhost:3000/tasks';
-
+import { API_URL } from './constants.js';
 export const getTasks = async () => {
     try {
         const response = await fetch(API_URL);
