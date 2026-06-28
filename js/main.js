@@ -1,6 +1,6 @@
 
 import { toggleView, renderTasks, updateTaskItem, updateProgressBar, buildTaskItem } from './ui.js';
-import { addTask, getTasks, updateTask, deleteTask } from './api.js';
+import { addTask, getTasks, updateTask, deleteTask } from './apiConnection.js';
 import { initFilters,getNextStatus  } from './filters.js';
 import { TASK_STATUS, FILTERS } from './constants.js';
 

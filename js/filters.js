@@ -1,3 +1,5 @@
+import { TASK_STATUS } from './constants.js';
+
 export const initFilters = (onFilterChange) => {
     const filterButtons = document.querySelectorAll('.filter-btn');
 
@@ -12,7 +14,8 @@ export const initFilters = (onFilterChange) => {
     });   
 
 };
-const getNextStatus = (currentStatus) => {
+
+export const getNextStatus = (currentStatus) => {
     if (currentStatus === TASK_STATUS.PENDING) return TASK_STATUS.IN_PROGRESS;
     if (currentStatus === TASK_STATUS.IN_PROGRESS) return TASK_STATUS.COMPLETED;
     return TASK_STATUS.PENDING;
